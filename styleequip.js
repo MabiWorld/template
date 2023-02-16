@@ -1067,7 +1067,7 @@ function updateEquipOutput() {
 	if ($(".equip-market").is(":visible")) {
 		out += filterAndPrefixAll("|", [
 			"BuyPrice=" + $("#equip-buyprice").val(),
-			"SellPrice=" + (parseInt($("#equip-sellprice").val()) || ""),
+			"SellPrice=" + $("#equip-sellprice").val(),
 		], "\n");
 	}
 
