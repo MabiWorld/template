@@ -318,7 +318,7 @@ function updateEquipForm() {
 	function setDye(name, idx) {
 		var sel = ".equip-dyeing input[name='" + name + "']";
 		$(sel).prop("checked", false);
-		$(sel + "[value='" + idx + "']").prop("checked", true);
+		$(sel + "[value='" + (idx || 0) + "']").prop("checked", true);
 	}
 
 	function clearList(sel) {
@@ -502,6 +502,9 @@ function updateEquipForm() {
 		setXmlDye("color1", "App_Color1");
 		setXmlDye("color2", "App_Color2");
 		setXmlDye("color3", "App_Color3");
+		setXmlDye("color4", "App_Color5");
+		setXmlDye("color5", "App_Color6");
+		setXmlDye("color6", "App_Color7");
 
 		// Market
 		$(".equip-market").show();
@@ -653,6 +656,9 @@ function updateEquipForm() {
 		setDye("color1", get("Color1"));
 		setDye("color2", get("Color2"));
 		setDye("color3", get("Color3"));
+		setDye("color4", get("Color4"));
+		setDye("color5", get("Color5"));
+		setDye("color6", get("Color6"));
 
 		// Can*
 		setTrue("#equip-category-reforgeable", "CanReforge", "False");
@@ -1136,6 +1142,17 @@ function updateEquipOutput() {
 		"Color2=" + $(".equip-dyeing [name='color2']:checked").val(),
 		"Color3=" + $(".equip-dyeing [name='color3']:checked").val(),
 	], "\n");
+	
+	var color4 = parseInt($(".equip-dyeing [name='color4']:checked").val());
+	var color5 = parseInt($(".equip-dyeing [name='color5']:checked").val());
+	var color6 = parseInt($(".equip-dyeing [name='color6']:checked").val());
+	if (color4 || color5 || color6) {
+		out += filterAndPrefixAll("|", [
+			"Color4=" + color4,
+			"Color5=" + color5,
+			"Color6=" + color6,
+		], "\n");
+	}
 
 	// Can*
 	out += filterAndPrefixAll("|", [
