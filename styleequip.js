@@ -318,7 +318,7 @@ function updateEquipForm() {
 	function setDye(name, idx) {
 		var sel = ".equip-dyeing input[name='" + name + "']";
 		$(sel).prop("checked", false);
-		$(sel + "[value='" + idx + "']").prop("checked", true);
+		$(sel + "[value='" + (idx || 0) + "']").prop("checked", true);
 	}
 
 	function clearList(sel) {
@@ -1141,10 +1141,18 @@ function updateEquipOutput() {
 		"Color1=" + $(".equip-dyeing [name='color1']:checked").val(),
 		"Color2=" + $(".equip-dyeing [name='color2']:checked").val(),
 		"Color3=" + $(".equip-dyeing [name='color3']:checked").val(),
-		"Color4=" + $(".equip-dyeing [name='color4']:checked").val(),
-		"Color5=" + $(".equip-dyeing [name='color5']:checked").val(),
-		"Color6=" + $(".equip-dyeing [name='color6']:checked").val(),
 	], "\n");
+	
+	var color4 = parseInt($(".equip-dyeing [name='color4']:checked").val());
+	var color5 = parseInt($(".equip-dyeing [name='color5']:checked").val());
+	var color6 = parseInt($(".equip-dyeing [name='color6']:checked").val());
+	if (color4 || color5 || color6) {
+		out += filterAndPrefixAll("|", [
+			"Color4=" + color4,
+			"Color5=" + color5,
+			"Color6=" + color6,
+		], "\n");
+	}
 
 	// Can*
 	out += filterAndPrefixAll("|", [
