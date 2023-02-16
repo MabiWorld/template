@@ -506,7 +506,7 @@ function updateEquipForm() {
 		// Market
 		$(".equip-market").show();
 		set("#equip-buyprice", "Price_Buy").change();
-		if (set("#equip-sellprice", "Price_Sell", nozero).val() == "") {
+		if (set("#equip-sellprice", "Price_Sell").val() == "") {
 			$(".equip-sellprice").hide();
 			$(".equip-resell label").addClass("highlight")
 		} else {
