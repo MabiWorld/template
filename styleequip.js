@@ -1166,14 +1166,14 @@ function updateEquipOutput() {
 
 	// Color palettes
 	out += filterAndPrefixAll("|", [
-		"Color1=" + DyeNames[$(".equip-dyeing [name='color1']:checked").val()],
-		"Color2=" + DyeNames[$(".equip-dyeing [name='color2']:checked").val()],
-		"Color3=" + DyeNames[$(".equip-dyeing [name='color3']:checked").val()],
+		"Color1=" + (DyeNames[$(".equip-dyeing [name='color1']:checked").val()] ?? ""),
+		"Color2=" + (DyeNames[$(".equip-dyeing [name='color2']:checked").val()] ?? ""),
+		"Color3=" + (DyeNames[$(".equip-dyeing [name='color3']:checked").val()] ?? ""),
 	], "\n");
 	
-	var color4 = parseInt($(".equip-dyeing [name='color4']:checked").val());
-	var color5 = parseInt($(".equip-dyeing [name='color5']:checked").val());
-	var color6 = parseInt($(".equip-dyeing [name='color6']:checked").val());
+	var color4 = parseInt($(".equip-dyeing [name='color4']:checked").val() ?? "0");
+	var color5 = parseInt($(".equip-dyeing [name='color5']:checked").val() ?? "0");
+	var color6 = parseInt($(".equip-dyeing [name='color6']:checked").val() ?? "0");
 	if (color4 || color5 || color6) {
 		out += filterAndPrefixAll("|", [
 			"Color4=" + DyeNames[color4.toString()],
