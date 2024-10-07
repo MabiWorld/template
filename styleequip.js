@@ -56,6 +56,31 @@ real_brionac
 tool
 */
 
+const DyeNames = {
+	"0": "",
+    "1": "Cloth",
+    "2": "Leather",
+    "3": "Pixie",
+    "4": "Nylon",
+    "33": "Winter Lights",
+    "35": "Sprinkles",
+    "58": "Panda",
+    "61": "Elf",
+    "62": "Fur",
+    "65": "Giant",
+
+	// Metals
+    "5": "Armor Metal",
+    "23": "Weapon Metal",
+    "24": "Hilt Metal",
+    "200": "Armor Metal",
+    "201": "Weapon Metal",
+    "202": "Hilt Metal",
+
+	// Dye Blockers
+    "12": "None", // slot can still be seen ingame
+};
+
 function showSubCategoryStuff(t, h) {
 	var val = "/" + $(t).val() + "/";
 	// Enable special forms:
@@ -406,6 +431,9 @@ function updateEquipForm() {
 				// No closing main element.
 				subxml += "</xml>";
 			}
+
+			// Add space between ending " of a param value and next attribute
+			subxml = subxml.replace(/(=\s*"[^"]*")(\S)/g, "$1 $2");
 
 			var subdoc = jQuery.parseXML(subxml);
 
@@ -1138,9 +1166,9 @@ function updateEquipOutput() {
 
 	// Color palettes
 	out += filterAndPrefixAll("|", [
-		"Color1=" + $(".equip-dyeing [name='color1']:checked").val(),
-		"Color2=" + $(".equip-dyeing [name='color2']:checked").val(),
-		"Color3=" + $(".equip-dyeing [name='color3']:checked").val(),
+		"Color1=" + DyeNames[$(".equip-dyeing [name='color1']:checked").val()],
+		"Color2=" + DyeNames[$(".equip-dyeing [name='color2']:checked").val()],
+		"Color3=" + DyeNames[$(".equip-dyeing [name='color3']:checked").val()],
 	], "\n");
 	
 	var color4 = parseInt($(".equip-dyeing [name='color4']:checked").val());
@@ -1148,9 +1176,9 @@ function updateEquipOutput() {
 	var color6 = parseInt($(".equip-dyeing [name='color6']:checked").val());
 	if (color4 || color5 || color6) {
 		out += filterAndPrefixAll("|", [
-			"Color4=" + color4,
-			"Color5=" + color5,
-			"Color6=" + color6,
+			"Color4=" + DyeNames[color4.toString()],
+			"Color5=" + DyeNames[color5.toString()],
+			"Color6=" + DyeNames[color6.toString()],
 		], "\n");
 	}
 
